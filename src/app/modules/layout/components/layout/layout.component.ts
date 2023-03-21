@@ -10,8 +10,10 @@ export class LayoutComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.authService.getProfile()
-      .subscribe();
+      .subscribe(() => {
+        console.log('get profile');
+      });
   }
 }
