@@ -1,7 +1,5 @@
-export type Colors = 'sky' | 'green' | 'yellow' | 'red' | 'violet'
-  | 'gray' | 'success' | 'primary' | 'danger' | 'light';
+export type Colors = 'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray' | 'success' | 'primary' | 'danger' | 'light';
 
-// export type ObjColors = Record<Colors, Record<string, boolean>>;
 export type ObjColors = Record<string, Record<string, boolean>>;
 
 export const COLORS: ObjColors = {

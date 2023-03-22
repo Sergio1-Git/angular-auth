@@ -10,4 +10,4 @@ import { CardColorComponent } from './components/card-color/card-color.component
   imports: [CommonModule, FontAwesomeModule],
   exports: [ButtonComponent, CardColorComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

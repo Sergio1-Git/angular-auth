@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Colors, COLORS } from '../../../../models/colors.model';
+
+import { Colors, COLORS } from '@models/colors.model';
 
 @Component({
   selector: 'app-btn',
@@ -11,12 +12,11 @@ export class ButtonComponent {
   @Input() loading = false;
   @Input() typeBtn: 'reset' | 'submit' | 'button' = 'button';
   @Input() color: Colors = 'primary';
-
   faSpinner = faSpinner;
 
   mapColors = COLORS;
 
-  constructor() { }
+  constructor() {}
 
   get colors() {
     const colors = this.mapColors[this.color];

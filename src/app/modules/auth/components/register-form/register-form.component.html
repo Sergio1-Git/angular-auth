@@ -1,11 +1,6 @@
 <div *ngIf="!showRegister">
   <h1 class="text-center font-bold py-2 text-gray-700">Enter your data</h1>
-  <form
-    [formGroup]="formUser"
-    novalidate
-    class="space-y-4"
-    (ngSubmit)="validateUser()"
-  >
+  <form [formGroup]="formUser" novalidate class="space-y-4" (ngSubmit)="validateUser()">
     <div>
       <div class="relative">
         <input
@@ -13,14 +8,11 @@
           placeholder="Enter email"
           type="email"
           name="email"
+          autocomplete="off"
           class="w-full rounded bg-gray-100 border-gray-300 border-2"
         />
       </div>
-      <div
-        *ngIf="
-          formUser.controls.email.touched && formUser.controls.email.invalid
-        "
-      >
+      <div *ngIf="formUser.controls.email.touched && formUser.controls.email.invalid">
         <p
           *ngIf="formUser.controls.email.hasError('required')"
           class="font-medium text-red-500 text-xs mt-1 ml-1"
@@ -35,8 +27,9 @@
         </p>
       </div>
     </div>
+
     <div>
-      <app-btn typeBtn="submit" color="success" [loading]="status === 'loading'"
+      <app-btn typeBtn="submit" color="success" [loading]="statusUser === 'loading'"
         >Continue</app-btn
       >
     </div>
@@ -73,6 +66,7 @@
           placeholder="Enter email"
           type="email"
           name="email"
+          autocomplete="off"
           class="w-full rounded bg-gray-100 border-gray-300 border-2"
         />
       </div>
@@ -149,7 +143,7 @@
           *ngIf="form.controls.confirmPassword.hasError('minlength')"
           class="font-medium text-red-500 text-xs mt-1 ml-1"
         >
-          This field should be greater than 8 characters
+          This field should be greater than 6 characters
         </p>
       </div>
     </div>
@@ -167,4 +161,5 @@
       >
     </div>
   </form>
+
 </div>

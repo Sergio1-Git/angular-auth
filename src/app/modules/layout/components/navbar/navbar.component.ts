@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import {
   faBell,
@@ -7,7 +6,8 @@ import {
   faClose,
   faAngleDown
 } from '@fortawesome/free-solid-svg-icons';
-import { TokenService } from '@services/token.service';
+
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,17 +26,12 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private tokenService: TokenService,
-  ) { }
+    private router: Router
+  ) {}
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
-  isValidToken() {
-    console.log(this.tokenService.isValidToken());
-
-  }
 }

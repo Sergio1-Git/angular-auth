@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -8,12 +8,12 @@ import { AuthService } from '../../../../services/auth.service';
 export class LayoutComponent implements OnInit {
   constructor(
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.authService.getProfile()
-      .subscribe(() => {
-        console.log('get profile');
-      });
+    .subscribe(() => {
+      console.log('get profile');
+    });
   }
 }

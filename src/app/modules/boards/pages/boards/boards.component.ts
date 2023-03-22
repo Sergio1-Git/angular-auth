@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faBox, faWaveSquare, faClock, faAngleUp, faAngleDown, faHeart, faBorderAll, faUsers, faGear } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
-import { MeService } from '../../../../services/me.service';
-import { Board } from '../../../../models/board.model';
+
+import { MeService } from '@services/me.service';
+import { Board } from '@models/board.model';
 
 @Component({
   selector: 'app-boards',
@@ -33,8 +34,9 @@ export class BoardsComponent implements OnInit {
 
   getMeBoards() {
     this.meService.getMeBoards()
-      .subscribe(boards => {
-        this.boards = boards;
-      })
+    .subscribe(boards => {
+      this.boards = boards;
+    });
   }
+
 }

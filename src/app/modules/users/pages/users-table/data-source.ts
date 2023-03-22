@@ -6,7 +6,7 @@ import { User } from '@models/user.model';
 export class DataSourceUser extends DataSource<User> {
 
   data = new BehaviorSubject<User[]>([]);
-  originalData: User[] = [];
+  originalData: User[]= [];
 
   connect(): Observable<User[]> {
     return this.data;
