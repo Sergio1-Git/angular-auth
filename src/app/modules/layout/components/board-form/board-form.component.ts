@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BoardsService } from '../../../../services/boards.service';
 import { Colors } from '../../../../models/colors.model';
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./board-form.component.scss']
 })
 export class BoardFormComponent {
+
+  @Output() closeOverlay = new EventEmitter<boolean>;
 
   form = this.fb.nonNullable.group({
     title: ['', [Validators.required]],
@@ -33,6 +35,7 @@ export class BoardFormComponent {
       this.boardsService.createBoard(title, backgroundColor)
         .subscribe((board) => {
           console.log(board);
+          this.closeOverlay.next(false);
           this.router.navigate(['/app/boards', board.id])
         });
     } else {
