@@ -23,22 +23,22 @@ export class BoardsService {
 
   getPosition(cards: Card[], currentIndex: number) {
     if (cards.length === 1) {
-      return 'is new: ' + this.bufferSpace;
+      return this.bufferSpace;
     }
     if (cards.length > 1 && currentIndex === 0) {
       const onTopPosition = cards[1].position;//anterior card
-      return 'is the top' + onTopPosition / 2;
+      return onTopPosition / 2;
     }
 
     const lastIndex = cards.length - 1;
     if (cards.length > 2 && currentIndex > 0 && currentIndex < lastIndex) {
       const prevPosition = cards[currentIndex - 1].position;
       const nextPosition = cards[currentIndex + 1].position;
-      return 'is the middle' + (prevPosition + nextPosition) / 2;
+      return (prevPosition + nextPosition) / 2;
     }
     if (cards.length > 1 && currentIndex === lastIndex) {
       const onBottomPosition = cards[lastIndex - 1].position;
-      return 'is the bottom' + (onBottomPosition + this.bufferSpace);
+      return (onBottomPosition + this.bufferSpace);
     }
     return 0;
     // console.log(cards, ' index: ', currentIndex);
