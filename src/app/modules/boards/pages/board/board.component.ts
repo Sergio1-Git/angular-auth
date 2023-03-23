@@ -34,7 +34,7 @@ export class BoardComponent implements OnInit {
     private dialog: Dialog,
     private route: ActivatedRoute,
     private boardsService: BoardsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -60,6 +60,9 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
+    const rta = this.boardsService.getPosition(event.container.data, event.currentIndex);
+    console.log(rta);
+
   }
 
   addColumn() {
@@ -86,8 +89,8 @@ export class BoardComponent implements OnInit {
 
   private getBoard(id: string) {
     this.boardsService.getBoard(id)
-    .subscribe(board => {
-      this.board = board;
-    })
+      .subscribe(board => {
+        this.board = board;
+      })
   }
 }
