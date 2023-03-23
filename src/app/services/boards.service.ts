@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 import { checkToken } from '@interceptors/token.interceptor';
-import { User } from '@models/user.model';
 import { Board } from '@models/board.model';
 import { Card } from '../models/card.model';
 
@@ -12,6 +11,7 @@ import { Card } from '../models/card.model';
 })
 export class BoardsService {
   apiUrl = environment.API_URL;
+  bufferSpace = 65535;
 
   constructor(private http: HttpClient) { }
 
@@ -23,17 +23,22 @@ export class BoardsService {
 
   getPosition(cards: Card[], currentIndex: number) {
     if (cards.length === 1) {
-      return 'is new';
+      return 'is new: ' + this.bufferSpace;
     }
     if (cards.length > 1 && currentIndex === 0) {
-      return 'is the top';
+      const onTopPosition = cards[1].position;//anterior card
+      return 'is the top' + onTopPosition / 2;
     }
+
     const lastIndex = cards.length - 1;
     if (cards.length > 2 && currentIndex > 0 && currentIndex < lastIndex) {
-      return 'is the middle';
+      const prevPosition = cards[currentIndex - 1].position;
+      const nextPosition = cards[currentIndex + 1].position;
+      return 'is the middle' + (prevPosition + nextPosition) / 2;
     }
     if (cards.length > 1 && currentIndex === lastIndex) {
-      return 'is the bottom';
+      const onBottomPosition = cards[lastIndex - 1].position;
+      return 'is the bottom' + (onBottomPosition + this.bufferSpace);
     }
     return 0;
     // console.log(cards, ' index: ', currentIndex);
