@@ -39,12 +39,12 @@
           >
           <div class="w-full" *ngIf="list.showCardForm">
             <textarea
-            placeholder="Enter a title for ths card"
+              placeholder="Enter a title for ths card"
               [formControl]="inputCard"
               class="w-full border-gray-300 outline-none shadow-sm"
             ></textarea>
             <div class="flex space-x-2 justify-between">
-              <app-btn color="success" (click)="createCard()">Create</app-btn>
+              <app-btn color="success" (click)="createCard(list)">Create</app-btn>
               <app-btn color="light" (click)="closeCardForm(list)"
                 >Close</app-btn
               >

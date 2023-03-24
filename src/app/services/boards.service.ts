@@ -26,7 +26,7 @@ export class BoardsService {
     return this.http.post<Board>(`${this.apiUrl}/api/v1/boards`, {
       title,
       backgroundColor
-    },{
+    }, {
       context: checkToken(),
     });
   }
@@ -52,5 +52,14 @@ export class BoardsService {
     }
     return 0;
     // console.log(cards, ' index: ', currentIndex);
+  }
+
+  getPositionNewCard(cards: Card[]) {
+    if (cards.length === 0) {
+      return this.bufferSpace;
+    }
+    const lastIndex = cards.length - 1;
+    const onBottomPosition = cards[lastIndex].position;
+    return (onBottomPosition + this.bufferSpace);
   }
 }
