@@ -13,6 +13,7 @@ import { BoardsService } from '@services/boards.service';
 import { Board } from '@models/board.model';
 import { CardsService } from '../../../../services/cards.service';
 import { List } from '../../../../models/list.model';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -31,12 +32,17 @@ import { List } from '../../../../models/list.model';
 export class BoardComponent implements OnInit {
 
   board: Board | null = null;
+  inputCard = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required]
+  });
 
   constructor(
     private dialog: Dialog,
     private route: ActivatedRoute,
     private boardsService: BoardsService,
     private cardsService: CardsService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit() {
@@ -121,4 +127,15 @@ export class BoardComponent implements OnInit {
       });
     }
   }
+
+  createCard() {
+    const title = this.inputCard.value;
+    console.log(title);
+  }
+
+  closeCardForm(list: List) {
+    list.showCardForm = false;
+  }
+
+
 }
