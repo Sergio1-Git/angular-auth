@@ -39,12 +39,14 @@
           >
           <div class="w-full" *ngIf="list.showCardForm">
             <textarea
-              placeholder="Enter a title for ths card"
+              placeholder="Enter a title for this card"
               [formControl]="inputCard"
               class="w-full border-gray-300 outline-none shadow-sm"
             ></textarea>
             <div class="flex space-x-2 justify-between">
-              <app-btn color="success" (click)="createCard(list)">Create</app-btn>
+              <app-btn color="success" (click)="createCard(list)"
+                >Create</app-btn
+              >
               <app-btn color="light" (click)="closeCardForm(list)"
                 >Close</app-btn
               >
@@ -52,9 +54,27 @@
           </div>
         </div>
       </div>
-      <app-btn color="light" class="shrink-0" (click)="addColumn()"
-        >Add Column</app-btn
-      >
+      <div class="shrink-0">
+        <app-btn
+          *ngIf="!showListForm"
+          color="light"
+          (click)="showListForm = !showListForm"
+          >Add Column</app-btn
+        >
+        <div class="w-full bg-white p-1 rounded" *ngIf="showListForm">
+          <textarea
+            placeholder="Enter a title for this list"
+            [formControl]="inputList"
+            class="w-full border-gray-300 outline-none shadow-sm"
+          ></textarea>
+          <div class="flex space-x-2 justify-between">
+            <app-btn color="success" (click)="addList()">Create</app-btn>
+            <app-btn color="light" (click)="showListForm = !showListForm"
+              >Close</app-btn
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

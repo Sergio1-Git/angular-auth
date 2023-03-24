@@ -14,6 +14,7 @@ import { Board } from '@models/board.model';
 import { CardsService } from '../../../../services/cards.service';
 import { List } from '../../../../models/list.model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ListsService } from '../../../../services/lists.service';
 
 @Component({
   selector: 'app-board',
@@ -32,16 +33,23 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class BoardComponent implements OnInit {
 
   board: Board | null = null;
+
   inputCard = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required]
   });
+  inputList = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required]
+  });
+  showListForm = false;
 
   constructor(
     private dialog: Dialog,
     private route: ActivatedRoute,
     private boardsService: BoardsService,
     private cardsService: CardsService,
+    private listsService: ListsService,
     private fb: FormBuilder,
   ) { }
 
@@ -75,11 +83,23 @@ export class BoardComponent implements OnInit {
     this.updateCard(card, position, listId);
   }
 
-  addColumn() {
-    // this.columns.push({
-    //   title: 'New Column',
-    //   todos: [],
-    // });
+  addList() {
+    const title = this.inputList.value;
+    if (this.board) {
+      this.listsService.create({
+        title,
+        boardId: this.board.id,
+        position: this.boardsService.getPositionNewItem(this.board.lists),
+      })
+        .subscribe(list => {
+          this.board?.lists.push({
+            ...list,
+            cards: [],
+          });
+          this.inputList.setValue('');
+          this.showListForm = false;
+        })
+    }
   }
 
   openDialog(card: Card) {
@@ -135,7 +155,7 @@ export class BoardComponent implements OnInit {
         title,
         listId: list.id,
         boardId: this.board.id,
-        position: this.boardsService.getPositionNewCard(list.cards),
+        position: this.boardsService.getPositionNewItem(list.cards),
       })
         .subscribe(card => {
           list.cards.push(card);
